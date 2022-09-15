@@ -28,42 +28,15 @@ def checkResults():
         plus2Bonus = True
 
 
-def checkWinnings():
-    print("Which Lotto would you like to check?")
-    print("1)  Lotto")
-    print("2)  Lotto Plus 1")
-    print("3)  Lotto Plus 2")
-
-    option = int(input("---->"))
-
-    while (not validateInput(option, 1, 3)):
-        option = int(input("---->"))
-    if option == 1:
-        print("Comparing user results to Lotto numbers")
-
-        print(returnMatches(userNumbers, lotto))
-        prizeWon(lotto)
-
-    if option == 2:
-        print("Comparing user results to Lotto plus 1 numbers")
-
-        print(returnMatches(userNumbers, plus1))
-
-    if option == 3:
-        print("Comparing user results to Lotto plus 2 numbers")
-        print(returnMatches(userNumbers, plus2))
-
-        # print(find_percentage_agreement(userNumbers,lotto))
-        # print()
-
 
 def returnMatches(a, b):
     return list(set(a) & set(b))
 
+
 def prizeWon(lottoList):
     if len(returnMatches(userNumbers, lottoList)) <= 2:
         print("You've lost")
-    if len(returnMatches(userNumbers,lottoList)) == 3:
+    if len(returnMatches(userNumbers, lottoList)) == 3:
         print("Congratulations you've won a scratchcard")
     if len(returnMatches(userNumbers, lottoList)) == 4:
         print("You've won a Cash Prize")
@@ -71,6 +44,7 @@ def prizeWon(lottoList):
         print("You've won a Cash Prize")
     if len(returnMatches(userNumbers, lottoList)) == 6:
         print("You've won the jackpot")
+
 
 def generateRandomLotto():
     global lotto, plus1, plus2
@@ -132,6 +106,7 @@ def userLottoNumbers():
     if option == 1:
         userNumbers = (random.sample(range(1, 46), 7))
         print(userNumbers)
+        mainMenu()
 
     if option == 2:
         print("Enter 6 numbers")
@@ -141,14 +116,41 @@ def userLottoNumbers():
                 num = int(input("Enter Number -->"))
             userNumbers.append(num)
             print(userNumbers)
+            mainMenu()
         print()
         print()
 
 
-# allQuickPick()
-# generateRandomLotto()
+def checkWinnings():
+    print("Which Lotto would you like to check?")
+    print("1)  Lotto")
+    print("2)  Lotto Plus 1")
+    print("3)  Lotto Plus 2")
+
+    option = int(input("---->"))
+
+    while (not validateInput(option, 1, 4)):
+        option = int(input("---->"))
+    if option == 1:
+        print("Comparing user results to Lotto numbers")
+        print(returnMatches(userNumbers, lotto))
+        prizeWon(lotto)
+        mainMenu()
+    if option == 2:
+        print("Comparing user results to Lotto plus 1 numbers")
+        print(returnMatches(userNumbers, plus1))
+        prizeWon(plus1)
+        mainMenu()
+    if option == 3:
+        print("Comparing user results to Lotto plus 2 numbers")
+        print(returnMatches(userNumbers, plus2))
+        prizeWon(plus2)
+        mainMenu()
+
+
+
 mainMenu()
-# userLottoNumbers()
+
 if __name__ == '__main__':
     # print(lotto)
     print()
